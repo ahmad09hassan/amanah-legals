@@ -1,4 +1,4 @@
-# Amanah Legal Solutions ‚Äî LPO Landing Page
+# Amanah Legal Solutions - LPO Landing Page
 
 High-converting landing page for Amanah Legal Solutions, a Legal Process Outsourcing (LPO)
 firm serving U.S. law firms from Sheridan, Wyoming.
@@ -8,14 +8,14 @@ firm serving U.S. law firms from Sheridan, Wyoming.
 Zero-dependency static site: a single self-contained `index.html` (inline CSS/JS,
 Google Fonts). No build step.
 
-- `index.html` ‚Äî the landing page
-- `thanks.html` ‚Äî form submission confirmation page
+- `index.html` - the landing page
+- `thanks.html` - form submission confirmation page
 
 ## Forms
 
 The lead form uses [Netlify Forms](https://docs.netlify.com/forms/setup/)
 (`data-netlify="true"`, form name `lead`, honeypot `bot-field`). Submissions appear in
-the Netlify dashboard under **Forms ‚Üí lead** once deployed. The form redirects to
+the Netlify dashboard under **Forms  lead** once deployed. The form redirects to
 `/thanks.html` on success.
 
 ## Deploy
@@ -25,7 +25,7 @@ directory `/`.
 
 ## Conversion architecture (for future editors)
 
-The page is structured as a legal brief ‚Äî each section is an "exhibit" in the argument:
+The page is structured as a legal brief - each section is an "exhibit" in the argument:
 
 | Section | Job |
 |---|---|
@@ -40,5 +40,5 @@ The page is structured as a legal brief ‚Äî each section is an "exhibit" in 
 | Contact | Lead form + direct booking path |
 
 Keep every claim defensible. The guarantee ("if the first deliverable isn't
-attorney-ready, you don't pay") is a real business commitment ‚Äî don't ship copy the
+attorney-ready, you don't pay") is a real business commitment - don't ship copy the
 firm can't honor.
