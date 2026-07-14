@@ -1038,16 +1038,16 @@ footer.site .legal{
       <span class="docket">Final Exhibit &#183; Getting Started</span>
       <h2 class="h-section">Ready to move the backlog off your desk?</h2>
       <p class="lede">Book a free 20-minute strategy call. You&rsquo;ll leave with a written scope, a fixed quote, and an NDA ready to sign, whether or not you proceed.</p>
-      <a class="btn btn--primary" href="mailto:info@amanahtalent.com?subject=Strategy%20Call%20Request%20&#8212;%20Amanah%20Legal%20Solutions">Book a Free Strategy Call <span class="arr">&#8594;</span></a>
+      <a class="btn btn--primary" href="mailto:info@amanahlegals.com?subject=Strategy%20Call%20Request%20&#8212;%20Amanah%20Legal%20Solutions">Book a Free Strategy Call <span class="arr">&#8594;</span></a>
       <div class="alt">
-        <div class="row"><span class="k">Email</span><a href="mailto:info@amanahtalent.com">info@amanahtalent.com</a></div>
+        <div class="row"><span class="k">Email</span><a href="mailto:info@amanahlegals.com">info@amanahlegals.com</a></div>
         <div class="row"><span class="k">Call</span><a href="tel:+923349107306">+92 334 9107306</a></div>
         <div class="row"><span class="k">WhatsApp</span><a href="https://wa.me/16505052194" target="_blank" rel="noopener">+1 (650) 505-2194</a></div>
         <div class="row"><span class="k">Office</span><span>Plot 214, i10/3, Islamabad, Pakistan</span></div>
       </div>
     </div>
 
-    <form class="lead rv" name="lead" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thanks.html">
+    <form class="lead rv" id="quoteForm" name="lead" method="POST" data-netlify="true" netlify-honeypot="bot-field">
       <input type="hidden" name="form-name" value="lead">
       <p style="display:none;"><label>Don&rsquo;t fill this out: <input name="bot-field"></label></p>
       <div class="f-head"><h3>Request a Scoped Quote</h3><span class="docket docket--muted">Response &lt; 1 business day</span></div>
@@ -1063,6 +1063,8 @@ footer.site .legal{
           <option>Document Review</option>
           <option>Contract Review &amp; Drafting</option>
           <option>Legal Research</option>
+          <option>Personal Injury</option>
+          <option>Tobacco Litigation</option>
           <option>Due Diligence</option>
           <option>Litigation Support</option>
           <option>Privacy &amp; Compliance</option>
@@ -1071,7 +1073,8 @@ footer.site .legal{
         </select>
       </div>
       <div class="f-field"><label for="f-msg">What&rsquo;s on your desk right now?</label><textarea id="f-msg" name="message" placeholder="e.g. ~40 vendor agreements to review by end of month&#8230;"></textarea></div>
-      <button class="btn btn--primary" type="submit">Get My Fixed Quote, Free <span class="arr">&#8594;</span></button>
+      <button class="btn btn--primary" type="submit" id="quoteSubmit">Get My Fixed Quote, Free <span class="arr">&#8594;</span></button>
+      <div id="formMsg" style="display:none;margin-top:1.2rem;padding:1rem 1.2rem;border-radius:2px;font-size:.92rem;"></div>
       <p class="f-fine">NDA available before you send anything sensitive.<br>Covered by the Attorney-Ready Guarantee.</p>
     </form>
   </div>
@@ -1101,8 +1104,8 @@ footer.site .legal{
     <div>
       <h4>Contact</h4>
       <ul>
-        <li><a href="mailto:info@amanahtalent.com">info@amanahtalent.com</a></li>
-        <li><a href="mailto:help@amanahtalent.com">help@amanahtalent.com</a></li>
+        <li><a href="mailto:info@amanahlegals.com">info@amanahlegals.com</a></li>
+        <li><a href="mailto:help@amanahlegals.com">help@amanahlegals.com</a></li>
         <li><a href="tel:+923349107306">+92 334 9107306</a></li>
         <li><a href="https://wa.me/16505052194" target="_blank" rel="noopener">WhatsApp: +1 (650) 505-2194</a></li>
         <li>Plot 214, i10/3, Islamabad, Pakistan</li>
@@ -1154,6 +1157,46 @@ footer.site .legal{
   }, 400);
   // absolute failsafe: everything visible after 6s no matter what
   setTimeout(()=>{ pending.forEach(reveal); clearInterval(tick); }, 6000);
+})();
+
+// Async Netlify form submission
+(function(){
+  const form = document.getElementById('quoteForm');
+  if(!form) return;
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    const btn = document.getElementById('quoteSubmit');
+    const msg = document.getElementById('formMsg');
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    msg.style.display = 'none';
+    try {
+      const res = await fetch('/', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: new URLSearchParams(new FormData(form)).toString()
+      });
+      if(res.ok){
+        form.reset();
+        msg.style.display = 'block';
+        msg.style.background = 'rgba(169,130,47,.1)';
+        msg.style.border = '1px solid rgba(169,130,47,.35)';
+        msg.style.color = 'var(--ink)';
+        msg.innerHTML = '<strong>Request received.</strong> We will review your scope and respond within one business day.';
+        btn.textContent = 'Sent';
+      } else {
+        throw new Error('Server error');
+      }
+    } catch(err){
+      msg.style.display = 'block';
+      msg.style.background = 'rgba(114,32,48,.08)';
+      msg.style.border = '1px solid rgba(114,32,48,.3)';
+      msg.style.color = 'var(--oxblood)';
+      msg.innerHTML = 'Something went wrong. Please email us directly at <a href="mailto:info@amanahlegals.com">info@amanahlegals.com</a>';
+      btn.disabled = false;
+      btn.innerHTML = 'Get My Fixed Quote, Free <span class="arr">&#8594;</span>';
+    }
+  });
 })();
 
 // Hide sticky CTA when the contact form is on screen
