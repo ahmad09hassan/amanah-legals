@@ -1170,11 +1170,19 @@ footer.site .legal{
     btn.disabled = true;
     btn.textContent = 'Sending...';
     msg.style.display = 'none';
+
+    // Build encoded body manually (most reliable cross-browser)
+    const data = {};
+    new FormData(form).forEach(function(val, key){ data[key] = val; });
+    const body = Object.keys(data)
+      .map(function(k){ return encodeURIComponent(k) + '=' + encodeURIComponent(data[k]); })
+      .join('&');
+
     try {
-      const res = await fetch('/', {
+      const res = await fetch(window.location.pathname, {
         method: 'POST',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        body: new URLSearchParams(new FormData(form)).toString()
+        body: body
       });
       if(res.ok){
         form.reset();
@@ -1185,16 +1193,16 @@ footer.site .legal{
         msg.innerHTML = '<strong>Request received.</strong> We will review your scope and respond within one business day.';
         btn.textContent = 'Sent';
       } else {
-        throw new Error('Server error');
+        throw new Error('HTTP ' + res.status);
       }
     } catch(err){
       msg.style.display = 'block';
       msg.style.background = 'rgba(114,32,48,.08)';
       msg.style.border = '1px solid rgba(114,32,48,.3)';
       msg.style.color = 'var(--oxblood)';
-      msg.innerHTML = 'Something went wrong. Please email us directly at <a href="mailto:info@amanahlegals.com">info@amanahlegals.com</a>';
+      msg.innerHTML = 'Submission error (' + err.message + '). Email us at <a href="mailto:info@amanahlegals.com" style="color:var(--oxblood)">info@amanahlegals.com</a> and we\'ll respond within one business day.';
       btn.disabled = false;
-      btn.innerHTML = 'Get My Fixed Quote, Free <span class="arr">&#8594;</span>';
+      btn.innerHTML = 'Try Again <span class="arr">&#8594;</span>';
     }
   });
 })();
