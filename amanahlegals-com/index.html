@@ -253,21 +253,35 @@ nav.main .btn{padding:.7em 1.1em;font-size:.88rem;white-space:nowrap;flex-shrink
    FACTS BAR (proof strip)
 &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212; */
 .facts{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);background:var(--paper-shade);}
-.facts .wrap{
+.facts .wrap{display:flex;flex-direction:column;}
+.facts-row--4{
   display:grid;grid-template-columns:repeat(4,1fr);
+  border-bottom:1px solid var(--rule);
+}
+.facts-row--center{
+  display:flex;justify-content:center;
 }
 .facts .fact{
   padding:1.4rem 1.2rem;
   border-left:1px solid var(--rule);
   display:flex;flex-direction:column;gap:.2rem;
 }
-.facts .fact:first-child{border-left:none;padding-left:0;}
+.facts-row--4 .fact:first-child{border-left:none;padding-left:0;}
+.facts-row--center .fact{
+  border-left:none;
+  width:25%;
+  text-align:left;
+}
 .facts .fact b{font-family:var(--serif-text);font-weight:700;font-size:1.02rem;}
 .facts .fact span{font-size:.8rem;color:var(--ink-soft);line-height:1.45;}
 @media(max-width:820px){
-  .facts .wrap{grid-template-columns:1fr 1fr;}
-  .facts .fact:nth-child(3){border-left:none;padding-left:0;}
+  .facts-row--4{grid-template-columns:1fr 1fr;}
+  .facts-row--4 .fact:nth-child(3){border-left:none;padding-left:0;}
+  .facts-row--center .fact{width:50%;}
   .facts .fact{padding:1.1rem 1.2rem;}
+}
+@media(max-width:480px){
+  .facts-row--center .fact{width:100%;}
 }
 
 /* &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;
@@ -681,11 +695,15 @@ footer.site .legal{
 <!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; FACTS BAR &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
 <div class="facts">
   <div class="wrap">
-    <div class="fact"><b>Remote from Pakistan</b><span>Our paralegal team is based in Pakistan, delivering work remotely to U.S. law firms at a fraction of local cost.</span></div>
-    <div class="fact"><b>Mutual NDA first</b><span>Signed before a single document moves. No exceptions.</span></div>
-    <div class="fact"><b>Lawyer-reviewed, always</b><span>Every deliverable checked by a practicing lawyer, not just a paralegal.</span></div>
-    <div class="fact"><b>U.S. registered</b><span>Wyoming corporation. Your contract is with a U.S. entity. U.S. court formatting, federal &amp; state standards.</span></div>
-    <div class="fact"><b>No retainer required</b><span>Start with a single assignment. Fixed fee, fixed deadline.</span></div>
+    <div class="facts-row--4">
+      <div class="fact"><b>Remote from Pakistan</b><span>Our paralegal team is based in Pakistan, delivering work remotely to U.S. law firms at a fraction of local cost.</span></div>
+      <div class="fact"><b>Mutual NDA first</b><span>Signed before a single document moves. No exceptions.</span></div>
+      <div class="fact"><b>Lawyer-reviewed, always</b><span>Every deliverable checked by a practicing lawyer, not just a paralegal.</span></div>
+      <div class="fact"><b>U.S. registered</b><span>Wyoming corporation. Your contract is with a U.S. entity. U.S. court formatting, federal &amp; state standards.</span></div>
+    </div>
+    <div class="facts-row--center">
+      <div class="fact"><b>No retainer required</b><span>Start with a single assignment. Fixed fee, fixed deadline.</span></div>
+    </div>
   </div>
 </div>
 
