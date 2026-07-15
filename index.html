@@ -139,8 +139,11 @@ header.site .wrap{
   padding-top:.9rem;padding-bottom:.9rem;
 }
 .brand{display:inline-flex;align-items:center;text-decoration:none;line-height:1;}
-.brand img.logo-a{height:54px;width:auto;display:block;}
+.brand img.logo-a{height:54px;width:auto;display:block;flex-shrink:0;}
 .brand .name{font-family:var(--serif-display);font-size:1.3rem;letter-spacing:.06em;}
+.brand-caption{display:flex;flex-direction:column;justify-content:center;padding-left:.7rem;line-height:1.15;}
+.brand-caption .bc-main{font-family:var(--serif-display);font-size:.82rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink);font-weight:400;}
+.brand-caption .bc-sub{font-family:var(--mono);font-size:.48rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-top:.1rem;}
 .brand .sub{font-family:var(--mono);font-size:.58rem;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);}
 nav.main{display:flex;align-items:center;gap:2rem;}
 nav.main a.navlink{
@@ -624,6 +627,9 @@ footer.site .legal{
   <div class="wrap">
     <a class="brand" href="#top">
       <img class="logo-a" src="logo-a.png" alt="Amanah Legal Solutions">
+      <span class="brand-caption">
+        <span class="bc-main">Amanah Legals</span>
+      </span>
     </a>
     <nav class="main" aria-label="Main">
       <a class="navlink" href="#problem">The Problem</a>
