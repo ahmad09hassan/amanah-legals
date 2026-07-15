@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amanah Legal Solutions | Legal Process Outsourcing for U.S. Law Firms</title>
+<meta name="description" content="Amanah places dedicated remote paralegals inside U.S. law firms — certified in Clio, Filevine, and MyCase, supervised by practicing lawyers, governed by NDA. Try 15 hours risk-free. If you aren't thrilled, you pay nothing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;
+   TOKENS, "the brief" system
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212; */
+:root{
+  --paper:        #FAF7F0;
+  --paper-shade:  #F2EDE1;
+  --ink:          #1C2130;
+  --ink-soft:     #4C5265;
+  --buckram:      #14100D;   /* dark warm ink, book-cover sections */
+  --buckram-soft: #241D18;
+  --oxblood:      #722030;   /* law-reporter binding red */
+  --oxblood-deep: #571623;
+  --gold:         #A9812F;   /* foil on paper */
+  --gold-bright:  #C9A45C;   /* foil on dark */
+  --rule:         #DCD5C4;   /* hairline rules on paper */
+  --rule-dark:    #3A322A;
+  --paper-on-dark:#EFE9DC;
+
+  --serif-display:'Libre Caslon Display', 'Libre Caslon Text', Georgia, serif;
+  --serif-text:   'Libre Caslon Text', Georgia, serif;
+  --sans:         'Archivo', -apple-system, 'Helvetica Neue', sans-serif;
+  --mono:         'IBM Plex Mono', 'Courier New', monospace;
+
+  --w-max: 1180px;
+  --pad-x: clamp(20px, 5vw, 56px);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto;}
+  *,*::before,*::after{animation-duration:0.001s !important;transition-duration:0.001s !important;}
+}
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:1.04rem;
+  line-height:1.7;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--oxblood);color:var(--paper);}
+
+img{max-width:100%;display:block;}
+a{color:inherit;}
+
+.wrap{max-width:var(--w-max);margin:0 auto;padding-left:var(--pad-x);padding-right:var(--pad-x);}
+
+/* &#8212;&#8212;&#8212; shared type roles &#8212;&#8212;&#8212; */
+.docket{
+  font-family:var(--mono);
+  font-size:.72rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--oxblood);
+  font-weight:500;
+}
+.docket--gold{color:var(--gold-bright);}
+.docket--muted{color:var(--ink-soft);}
+
+h1,h2,h3{font-family:var(--serif-display);font-weight:400;line-height:1.12;letter-spacing:-0.01em;}
+.h-display{font-size:clamp(2.5rem, 5.6vw, 4.35rem);}
+.h-section{font-size:clamp(1.9rem, 3.6vw, 2.9rem);}
+.h-card{font-family:var(--serif-text);font-size:1.28rem;line-height:1.3;}
+
+.lede{font-size:clamp(1.06rem, 1.4vw, 1.2rem);color:var(--ink-soft);max-width:34em;}
+
+em.flourish{font-style:italic;}
+.underline-gold{
+  background-image:linear-gradient(to top, rgba(169,129,47,.34) 0 .14em, transparent .14em);
+}
+
+/* &#8212;&#8212;&#8212; exhibit header device &#8212;&#8212;&#8212; */
+.exhibit-head{
+  display:flex;align-items:baseline;gap:1.2rem;
+  border-top:2px solid var(--ink);
+  padding-top:1.1rem;
+  margin-bottom:.9rem;
+}
+.exhibit-head .docket{white-space:nowrap;}
+.exhibit-head::after{content:"";flex:1;border-top:1px solid var(--rule);align-self:center;}
+.dark .exhibit-head{border-top-color:var(--gold-bright);}
+.dark .exhibit-head::after{border-top-color:var(--rule-dark);}
+
+/* &#8212;&#8212;&#8212; buttons &#8212;&#8212;&#8212; */
+.btn{
+  display:inline-flex;align-items:center;gap:.6em;
+  font-family:var(--sans);font-weight:600;font-size:.98rem;
+  padding:1em 1.7em;
+  text-decoration:none;
+  border:1px solid transparent;
+  cursor:pointer;
+  transition:background .18s ease, color .18s ease, border-color .18s ease, transform .18s ease;
+}
+.btn .arr{font-family:var(--serif-text);transition:transform .18s ease;}
+.btn:hover .arr{transform:translateX(4px);}
+.btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px;}
+.btn--primary{background:var(--oxblood);color:#FDF9F0;}
+.btn--primary:hover{background:var(--oxblood-deep);}
+.btn--ghost{border-color:var(--ink);color:var(--ink);background:transparent;}
+.btn--ghost:hover{background:var(--ink);color:var(--paper);}
+.btn--gold{background:var(--gold-bright);color:var(--buckram);}
+.btn--gold:hover{background:#D9B876;}
+.btn--ghost-dark{border-color:var(--rule-dark);color:var(--paper-on-dark);}
+.btn--ghost-dark:hover{border-color:var(--gold-bright);color:var(--gold-bright);}
+
+/* &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;
+   TOP DOCKET STRIP + NAV
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212; */
+.docket-strip{
+  background:var(--buckram);
+  color:var(--paper-on-dark);
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;
+  padding:.55em 0;
+}
+.docket-strip .wrap{display:flex;justify-content:space-between;gap:1rem;}
+.docket-strip span b{color:var(--gold-bright);font-weight:500;}
+@media(max-width:720px){.docket-strip .wrap span:nth-child(2){display:none;}}
+
+header.site{
+  position:sticky;top:0;z-index:50;
+  background:rgba(250,247,240,.92);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--rule);
+}
+header.site .wrap{
+  display:flex;align-items:center;justify-content:space-between;
+  padding-top:.9rem;padding-bottom:.9rem;
+}
+.brand{display:inline-flex;align-items:center;text-decoration:none;line-height:1;}
+.brand img.logo-a{height:54px;width:auto;display:block;flex-shrink:0;}
+.brand .name{font-family:var(--serif-display);font-size:1.3rem;letter-spacing:.06em;}
+.brand-caption{display:flex;flex-direction:column;justify-content:center;padding-left:.7rem;line-height:1.15;}
+.brand-caption .bc-main{font-family:var(--serif-display);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);font-weight:400;white-space:nowrap;}
+.brand-caption .bc-sub{font-family:var(--mono);font-size:.48rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-top:.1rem;}
+.brand .sub{font-family:var(--mono);font-size:.58rem;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);}
+nav.main{display:flex;align-items:center;gap:1.1rem;flex-shrink:0;}
+nav.main a.navlink{
+  text-decoration:none;font-size:.82rem;font-weight:500;color:var(--ink-soft);
+  white-space:nowrap;transition:color .15s ease;
+}
+nav.main a.navlink:hover{color:var(--oxblood);}
+nav.main .btn{padding:.7em 1.1em;font-size:.82rem;white-space:nowrap;flex-shrink:0;}
+@media(max-width:880px){nav.main a.navlink{display:none;}}
+
+/* &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;
+   HERO
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212; */
+.hero{
+  position:relative;
+  padding:clamp(3.5rem,7vw,6rem) 0 clamp(3rem,6vw,5rem);
+  overflow:hidden;
+}
+.hero .wrap{
+  display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);
+  gap:clamp(2rem,5vw,4.5rem);align-items:center;
+}
+@media(max-width:940px){.hero .wrap{grid-template-columns:1fr;}}
+
+.hero .caption-rule{
+  display:flex;align-items:center;gap:1rem;margin-bottom:1.6rem;
+}
+.hero .caption-rule::before,
+.hero .caption-rule::after{content:"";flex:1;border-top:1px solid var(--rule);}
+.hero .caption-rule::before{max-width:2.4rem;}
+
+.hero h1{margin-bottom:1.4rem;}
+.hero h1 .strike{
+  position:relative;white-space:nowrap;
+}
+.hero h1 .strike::after{
+  content:"";position:absolute;left:-1%;right:-1%;top:54%;
+  border-top:3px solid var(--oxblood);
+  transform:rotate(-1.2deg);
+  transform-origin:center;
+}
+.hero .lede{margin-bottom:2.2rem;}
+.hero .cta-row{display:flex;flex-wrap:wrap;gap:.9rem;align-items:center;margin-bottom:1.4rem;}
+.hero .risk-note{
+  font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;color:var(--ink-soft);
+  display:flex;align-items:center;gap:.6em;
+}
+.hero .risk-note::before{content:"&#167;";color:var(--gold);font-size:1rem;}
+
+/* hero load sequence */
+@keyframes riseIn{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:none;}}
+.hero .caption-rule{animation:riseIn .7s ease .05s backwards;}
+.hero h1{animation:riseIn .7s ease .15s backwards;}
+.hero .lede{animation:riseIn .7s ease .28s backwards;}
+.hero .cta-row,.hero .risk-note{animation:riseIn .7s ease .4s backwards;}
+.hero .memo{animation:riseIn .8s ease .5s backwards;}
+
+/* &#8212;&#8212;&#8212; the engagement-memo artifact &#8212;&#8212;&#8212; */
+.memo{
+  position:relative;
+  background:#FFFEFA;
+  border:1px solid var(--rule);
+  box-shadow:0 1px 0 var(--rule), 0 24px 48px -24px rgba(28,33,48,.28);
+  padding:2rem 2rem 2.4rem;
+  font-family:var(--mono);
+  max-width:420px;justify-self:end;width:100%;
+}
+.memo::before{ /* second sheet */
+  content:"";position:absolute;inset:0;
+  background:#FBF8F1;border:1px solid var(--rule);
+  transform:rotate(2.1deg);z-index:-1;
+}
+.memo .m-head{
+  display:flex;justify-content:space-between;align-items:baseline;
+  border-bottom:2px solid var(--ink);padding-bottom:.7rem;margin-bottom:1.1rem;
+  font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+}
+.memo .m-head b{font-weight:500;color:var(--oxblood);}
+.memo .m-row{
+  display:flex;justify-content:space-between;gap:1rem;
+  font-size:.78rem;padding:.55rem 0;border-bottom:1px solid var(--rule);
+}
+.memo .m-row span:first-child{color:var(--ink-soft);}
+.memo .m-row .ok{color:var(--oxblood);font-weight:500;}
+.memo .m-sig{
+  margin-top:1.6rem;display:flex;justify-content:space-between;align-items:flex-end;gap:1rem;
+}
+.memo .m-sig .line{flex:1;}
+.memo .m-sig .line .scr{
+  font-family:var(--serif-text);font-style:italic;font-size:1.15rem;color:var(--ink);
+  transform:rotate(-2deg);display:block;margin-bottom:.1rem;
+}
+.memo .m-sig .line{border-bottom:1px solid var(--ink);padding-bottom:.15rem;}
+.memo .m-sig .cap{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);margin-top:.4rem;}
+.stamp{
+  position:absolute;right:1.2rem;bottom:4.2rem;
+  border:3px double var(--oxblood);color:var(--oxblood);
+  font-family:var(--mono);font-weight:500;font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;
+  padding:.5em .9em;transform:rotate(-8deg);
+  opacity:.92;
+}
+@media(max-width:940px){.memo{justify-self:start;margin-top:.5rem;}}
+
+/* &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;
+   FACTS BAR (proof strip)
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212; */
+.facts{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);background:var(--paper-shade);}
+.facts .wrap{
+  display:grid;grid-template-columns:repeat(4,1fr);
+}
+.facts .fact{
+  padding:1.4rem 1.2rem;
+  border-left:1px solid var(--rule);
+  display:flex;flex-direction:column;gap:.2rem;
+}
+.facts .fact:first-child{border-left:none;padding-left:0;}
+.facts .fact b{font-family:var(--serif-text);font-weight:700;font-size:1.02rem;}
+.facts .fact span{font-size:.8rem;color:var(--ink-soft);line-height:1.45;}
+@media(max-width:820px){
+  .facts .wrap{grid-template-columns:1fr 1fr;}
+  .facts .fact:nth-child(3){border-left:none;padding-left:0;}
+  .facts .fact{padding:1.1rem 1.2rem;}
+}
+
+/* &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;
+   SECTIONS, generic rhythm
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212; */
+section.sec{padding:clamp(4rem,8vw,6.5rem) 0;}
+section.sec .sec-intro{max-width:44em;margin-bottom:clamp(2.2rem,4vw,3.4rem);}
+section.sec .sec-intro .h-section{margin:.5rem 0 1rem;}
+
+/* &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;
+   EXHIBIT A, THE PROBLEM
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212; */
+.problem-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+  background:var(--rule);border:1px solid var(--rule);
+  margin-bottom:3rem;
+}
+.problem-grid .p-card{background:var(--paper);padding:1.8rem 1.6rem;}
+.problem-grid .p-card .docket{display:block;margin-bottom:.9rem;}
+.problem-grid .p-card h3{margin-bottom:.6rem;}
+.problem-grid .p-card p{font-size:.94rem;color:var(--ink-soft);}
+@media(max-width:820px){.problem-grid{grid-template-columns:1fr;}}
+
+/* the math ledger */
+.ledger{
+  border:1px solid var(--ink);
+  background:#FFFEFA;
+  box-shadow:0 20px 40px -28px rgba(28,33,48,.3);
+}
+.ledger .l-head{
+  display:flex;justify-content:space-between;align-items:baseline;gap:1rem;
+  padding:1.1rem 1.6rem;border-bottom:2px solid var(--ink);
+}
+.ledger .l-head .docket{color:var(--ink-soft);}
+.ledger .l-head h3{font-family:var(--serif-text);font-size:1.15rem;}
+.ledger .l-row{
+  display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr) minmax(0,2fr);
+  gap:1rem;align-items:baseline;
+  padding:1rem 1.6rem;border-bottom:1px solid var(--rule);
+  font-size:.95rem;
+}
+.ledger .l-row:last-of-type{border-bottom:none;}
+.ledger .l-row .who{font-weight:600;}
+.ledger .l-row .who small{display:block;font-weight:400;color:var(--ink-soft);font-size:.8rem;line-height:1.4;}
+.ledger .l-row .rate{font-family:var(--mono);font-size:.9rem;}
+.ledger .l-row .verdict{font-size:.85rem;color:var(--ink-soft);}
+.ledger .l-row.red .rate{color:var(--oxblood);text-decoration:line-through;text-decoration-thickness:2px;}
+.ledger .l-row.hero-row{background:linear-gradient(to right, rgba(169,129,47,.09), transparent 70%);}
+.ledger .l-row.hero-row .verdict{color:var(--ink);font-weight:500;}
+.ledger .l-foot{
+  padding:1rem 1.6rem;background:var(--paper-shade);
+  font-family:var(--mono);font-size:.72rem;letter-spacing:.04em;color:var(--ink-soft);
+  border-top:1px solid var(--rule);
+}
+@media(max-width:720px){
+  .ledger .l-row{grid-template-columns:1fr;gap:.2rem;padding:1rem 1.2rem;}
+  .ledger .l-head{flex-direction:column;gap:.3rem;}
+}
+.problem-kicker{
+  margin-top:2.6rem;max-width:40em;
+  font-family:var(--serif-text);font-size:clamp(1.15rem,1.8vw,1.4rem);line-height:1.5;
+}
+.problem-kicker b{color:var(--oxblood);font-weight:700;}
+
+/* &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;
+   EXHIBIT B, MECHANISM (routing slip)
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212; */
+.sec--shade{background:var(--paper-shade);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);}
+.route{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:0;
+  border:1px solid var(--ink);background:#FFFEFA;
+}
+.route .step{
+  padding:1.7rem 1.4rem 2rem;
+  border-left:1px dashed var(--rule);
+  position:relative;
+}
+.route .step:first-child{border-left:none;}
+.route .step .num{
+  font-family:var(--serif-display);font-size:2rem;color:var(--gold);
+  display:block;margin-bottom:.7rem;
+}
+.route .step h3{font-family:var(--sans);font-weight:600;font-size:.98rem;margin-bottom:.45rem;}
+.route .step p{font-size:.85rem;color:var(--ink-soft);line-height:1.55;}
+.route .step .gate{
+  position:absolute;top:1.4rem;right:1.2rem;
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--oxblood);border:1px solid var(--oxblood);padding:.25em .5em;
+  transform:rotate(3deg);
+}
+@media(max-width:980px){.route{grid-template-columns:1fr;} .route .step{border-left:none;border-top:1px dashed var(--rule);} .route .step:first-child{border-top:none;}}
+.mech-note{
+  margin-top:2rem;display:flex;gap:1rem;align-items:flex-start;max-width:46em;
+  font-size:.95rem;color:var(--ink-soft);
+}
+.mech-note::before{content:"&#8251;";font-family:var(--serif-text);color:var(--gold);font-size:1.2rem;line-height:1.3;}
+
+/* &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;
+   EXHIBIT C, SERVICES
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212; */
+.svc-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);
+}
+.svc{background:var(--paper);padding:1.7rem 1.5rem;position:relative;transition:background .18s ease;}
+.svc:hover{background:#FFFEFA;}
+.svc .roman{font-family:var(--serif-text);font-style:italic;color:var(--gold);font-size:.95rem;display:block;margin-bottom:.8rem;}
+.svc h3{margin-bottom:.5rem;}
+.svc p{font-size:.9rem;color:var(--ink-soft);line-height:1.6;}
+@media(max-width:920px){.svc-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:640px){.svc-grid{grid-template-columns:1fr;}}
+.svc-more{
+  margin-top:1.6rem;font-size:.92rem;color:var(--ink-soft);
+}
+.svc-more b{color:var(--ink);}
+
+.areas{margin-top:3rem;display:flex;flex-wrap:wrap;gap:.6rem;}
+.areas .chip{
+  font-family:var(--mono);font-size:.74rem;letter-spacing:.08em;
+  border:1px solid var(--rule);padding:.5em 1em;color:var(--ink-soft);
+  background:#FFFEFA;
+}
+
+/* &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;
+   EXHIBIT D, CONFIDENTIALITY
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212; */
+.conf .wrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(2rem,5vw,4rem);align-items:start;}
+@media(max-width:900px){.conf .wrap{grid-template-columns:1fr;}}
+.pull{
+  font-family:var(--serif-text);font-style:italic;
+  font-size:clamp(1.3rem,2.2vw,1.7rem);line-height:1.5;
+  border-left:3px solid var(--gold);padding-left:1.4rem;
+  color:var(--ink);
+}
+.pull .attr{display:block;font-family:var(--mono);font-style:normal;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);margin-top:1.2rem;}
+.conf-list{display:grid;gap:0;border-top:1px solid var(--rule);}
+.conf-list .c-item{
+  display:grid;grid-template-columns:auto 1fr;gap:1.2rem;align-items:baseline;
+  padding:1.3rem 0;border-bottom:1px solid var(--rule);
+}
+.conf-list .c-item .sym{font-family:var(--serif-text);color:var(--oxblood);font-size:1.05rem;}
+.conf-list .c-item h3{font-family:var(--sans);font-weight:600;font-size:1rem;margin-bottom:.3rem;}
+.conf-list .c-item p{font-size:.9rem;color:var(--ink-soft);}
+
+/* &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;
+   EXHIBIT E, THE OFFER (dark)
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212; */
+.dark{background:var(--buckram);color:var(--paper-on-dark);}
+.dark .h-section,.dark h3{color:var(--paper-on-dark);}
+.offer .sec-intro p.lede{color:#B7AC97;}
+.offer-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,5fr);gap:clamp(2rem,5vw,4rem);align-items:start;}
+@media(max-width:940px){.offer-grid{grid-template-columns:1fr;}}
+
+.stack{border-top:1px solid var(--rule-dark);}
+.stack .s-item{
+  display:grid;grid-template-columns:auto 1fr auto;gap:1.1rem;align-items:baseline;
+  padding:1.15rem 0;border-bottom:1px solid var(--rule-dark);
+}
+.stack .s-item .idx{font-family:var(--serif-text);font-style:italic;color:var(--gold-bright);}
+.stack .s-item .what b{display:block;font-weight:600;font-size:1rem;color:var(--paper-on-dark);}
+.stack .s-item .what span{font-size:.85rem;color:#A99D86;line-height:1.5;}
+.stack .s-item .tag{font-family:var(--mono);font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-bright);white-space:nowrap;}
+
+/* the guarantee clause */
+.clause{
+  position:relative;
+  background:var(--paper);color:var(--ink);
+  padding:2.4rem 2.2rem 2.6rem;
+  box-shadow:0 32px 64px -32px rgba(0,0,0,.6);
+}
+.clause::before{
+  content:"";position:absolute;inset:10px;border:1px solid var(--rule);pointer-events:none;
+}
+.clause .docket{display:block;margin-bottom:1rem;}
+.clause h3{font-family:var(--serif-display);font-size:clamp(1.5rem,2.4vw,1.9rem);margin-bottom:1rem;}
+.clause p{font-size:.97rem;color:var(--ink-soft);margin-bottom:1rem;}
+.clause p b{color:var(--ink);}
+.clause .c-sig{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;margin-top:2rem;}
+.clause .c-sig .line{flex:1;border-bottom:1px solid var(--ink);position:relative;}
+.clause .c-sig .line .scr{font-family:var(--serif-text);font-style:italic;font-size:1.35rem;transform:rotate(-2deg);display:block;margin-bottom:.15rem;}
+.clause .c-sig .cap{font-family:var(--mono);font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);margin-top:.5rem;}
+.seal{
+  width:92px;height:92px;flex:none;border-radius:50%;
+  border:2px solid var(--oxblood);color:var(--oxblood);
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  font-family:var(--mono);font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;line-height:1.6;
+  position:relative;
+  transform:rotate(-10deg);
+}
+.seal::before{content:"";position:absolute;inset:6px;border-radius:50%;border:1px dashed var(--oxblood);}
+.offer-cta{margin-top:2.4rem;display:flex;flex-wrap:wrap;gap:1rem;align-items:center;}
+.offer-cta .cap-note{font-family:var(--mono);font-size:.72rem;letter-spacing:.05em;color:#A99D86;max-width:26em;line-height:1.6;}
+
+/* &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;
+   FAQ
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212; */
+.faq-list{max-width:52em;border-top:1px solid var(--rule);}
+.faq-list details{border-bottom:1px solid var(--rule);}
+.faq-list summary{
+  cursor:pointer;list-style:none;
+  display:flex;justify-content:space-between;align-items:baseline;gap:1.5rem;
+  padding:1.3rem 0;
+  font-family:var(--serif-text);font-size:1.12rem;
+  transition:color .15s ease;
+}
+.faq-list summary:hover{color:var(--oxblood);}
+.faq-list summary::-webkit-details-marker{display:none;}
+.faq-list summary .q-mark{font-family:var(--serif-text);font-style:italic;color:var(--gold);flex:none;transition:transform .2s ease;}
+.faq-list details[open] summary .q-mark{transform:rotate(45deg);}
+.faq-list details p{padding:0 0 1.4rem;max-width:46em;color:var(--ink-soft);font-size:.96rem;}
+
+/* &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;
+   CONTACT / FORM
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212; */
+.contact{border-top:1px solid var(--rule);}
+.contact .wrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(2.5rem,6vw,5rem);align-items:start;}
+@media(max-width:900px){.contact .wrap{grid-template-columns:1fr;}}
+.contact .talk h2{margin:.5rem 0 1.2rem;}
+.contact .talk .lede{margin-bottom:2rem;}
+.contact .talk .alt{
+  border-top:1px solid var(--rule);margin-top:2.4rem;padding-top:1.6rem;
+  font-size:.92rem;color:var(--ink-soft);
+}
+.contact .talk .alt a{color:var(--oxblood);font-weight:600;text-decoration:none;border-bottom:1px solid rgba(114,32,48,.35);}
+.contact .talk .alt a:hover{border-bottom-color:var(--oxblood);}
+.contact .talk .alt .row{display:flex;gap:.7em;margin-top:.6rem;align-items:baseline;}
+.contact .talk .alt .row .k{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;min-width:4.5em;color:var(--gold);}
+
+form.lead{
+  background:#FFFEFA;border:1px solid var(--ink);
+  padding:2.2rem 2rem 2.4rem;
+  box-shadow:0 24px 48px -30px rgba(28,33,48,.35);
+}
+form.lead .f-head{
+  display:flex;justify-content:space-between;align-items:baseline;
+  border-bottom:2px solid var(--ink);padding-bottom:.8rem;margin-bottom:1.5rem;
+}
+form.lead .f-head h3{font-family:var(--serif-text);font-size:1.2rem;}
+.f-field{margin-bottom:1.2rem;}
+.f-field label{
+  display:block;font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-soft);margin-bottom:.45rem;
+}
+.f-field input,.f-field select,.f-field textarea{
+  width:100%;padding:.85em 1em;
+  font-family:var(--sans);font-size:.98rem;color:var(--ink);
+  background:var(--paper);border:1px solid var(--rule);
+  transition:border-color .15s ease, background .15s ease;
+}
+.f-field input:focus,.f-field select:focus,.f-field textarea:focus{
+  outline:none;border-color:var(--oxblood);background:#FFF;
+}
+.f-field textarea{min-height:110px;resize:vertical;}
+.f-two{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+@media(max-width:560px){.f-two{grid-template-columns:1fr;}}
+form.lead .btn{width:100%;justify-content:center;margin-top:.4rem;}
+form.lead .f-fine{
+  margin-top:1rem;font-family:var(--mono);font-size:.64rem;letter-spacing:.06em;
+  color:var(--ink-soft);text-align:center;line-height:1.7;
+}
+
+/* &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;
+   FOOTER
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212; */
+footer.site{background:var(--buckram);color:#A99D86;padding:3.5rem 0 2.5rem;}
+footer.site .wrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,3fr) minmax(0,3fr);gap:2.5rem;}
+@media(max-width:820px){footer.site .wrap{grid-template-columns:1fr;}}
+footer.site .brand .name{color:var(--paper-on-dark);}
+footer.site p{font-size:.88rem;line-height:1.7;max-width:30em;margin-top:1rem;}
+footer.site h4{font-family:var(--mono);font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-bright);margin-bottom:1rem;font-weight:500;}
+footer.site ul{list-style:none;}
+footer.site li{margin-bottom:.55rem;font-size:.9rem;}
+footer.site a{color:inherit;text-decoration:none;transition:color .15s ease;}
+footer.site a:hover{color:var(--paper-on-dark);}
+footer.site .legal{
+  grid-column:1/-1;border-top:1px solid var(--rule-dark);margin-top:1.5rem;padding-top:1.5rem;
+  display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;
+}
+
+/* &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;
+   MOBILE STICKY CTA
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212; */
+.sticky-cta{
+  position:fixed;bottom:0;left:0;right:0;z-index:60;
+  display:none;
+  background:var(--buckram);border-top:1px solid var(--rule-dark);
+  padding:.7rem var(--pad-x);
+}
+.sticky-cta .btn{width:100%;justify-content:center;font-size:.95rem;padding:.9em 1em;}
+@media(max-width:720px){
+  .sticky-cta{display:block;}
+  body{padding-bottom:4.4rem;}
+}
+
+/* &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;
+   SCROLL REVEAL, progressive enhancement only.
+   Content is visible by default; .rv-wait is added by JS
+   just-in-time and always removed by a fallback sweep,
+   so content can never be stranded invisible.
+&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212; */
+.rv{transition:opacity .7s ease, transform .7s ease;}
+.rv-wait{opacity:0;transform:translateY(22px);}
+@media (prefers-reduced-motion: reduce){.rv-wait{opacity:1;transform:none;transition:none;}}
+
+/* ────────────────────────────────────────────────────────────
+   EXHIBIT F — THE PEOPLE
+──────────────────────────────────────────────────────────── */
+.team-spotlight{
+  display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);
+  gap:0;border:1px solid var(--rule);margin-bottom:2.8rem;
+}
+@media(max-width:820px){.team-spotlight{grid-template-columns:1fr;}}
+.team-spotlight .ts-photo{position:relative;background:var(--paper-shade);}
+.team-spotlight .ts-photo img{width:100%;height:100%;min-height:420px;object-fit:contain;object-position:center top;display:block;}
+.team-spotlight .ts-bio{padding:2.4rem 2.6rem;border-left:1px solid var(--rule);display:flex;flex-direction:column;justify-content:center;}
+@media(max-width:820px){.team-spotlight .ts-bio{border-left:none;border-top:1px solid var(--rule);}}
+.ts-bio .t-role{display:block;margin-bottom:.9rem;}
+.ts-bio h3{font-family:var(--serif-display);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:400;line-height:1.1;margin-bottom:.25rem;}
+.ts-bio .t-title-name{font-family:var(--serif-text);font-style:italic;color:var(--gold);font-size:1.05rem;margin-bottom:1.4rem;display:block;}
+.ts-bio .t-divider{width:36px;height:2px;background:var(--gold);margin-bottom:1.5rem;}
+.ts-bio .t-para{font-size:.95rem;color:var(--ink-soft);line-height:1.88;margin-bottom:1rem;}
+.ts-bio .t-para:last-child{margin-bottom:0;}
+
+.team-sub{margin-top:3rem;}
+.team-sub-head{
+  display:flex;align-items:baseline;gap:1.2rem;
+  border-top:1px solid var(--ink);padding-top:1rem;margin-bottom:1.6rem;
+}
+.team-sub-head::after{content:"";flex:1;border-top:1px solid var(--rule);align-self:center;}
+
+.team-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);
+  gap:1px;background:var(--rule);border:1px solid var(--rule);
+}
+@media(max-width:640px){.team-grid{grid-template-columns:1fr;}}
+.t-card{background:var(--paper);display:flex;flex-direction:column;}
+.t-card .tc-img{flex-shrink:0;height:340px;background:var(--paper-shade);display:flex;align-items:flex-start;justify-content:center;}
+.t-card .tc-img img{width:100%;height:100%;object-fit:contain;object-position:center top;display:block;}
+.t-card .tc-body{padding:1.5rem 1.6rem 1.8rem;border-top:1px solid var(--rule);}
+.tc-body .t-role{display:block;margin-bottom:.5rem;}
+.tc-body h3{font-family:var(--serif-text);font-size:1.16rem;font-weight:700;margin-bottom:.15rem;color:var(--ink);}
+.tc-body .t-title-name{font-size:.85rem;color:var(--gold);font-family:var(--mono);letter-spacing:.04em;margin-bottom:.9rem;display:block;}
+.tc-body p{font-size:.88rem;color:var(--ink-soft);line-height:1.72;}
+</style>
+</head>
+<body>
+
+<!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; DOCKET STRIP &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
+<div class="docket-strip">
+  <div class="wrap">
+    <span>Amanah Legal Solutions &#183; Islamabad, Pakistan</span>
+    <span>Legal Process Outsourcing for U.S. Law Firms</span>
+    <span><b>NDA executed within 24 hours</b></span>
+  </div>
+</div>
+
+<!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; NAV &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <img class="logo-a" src="logo-a.png" alt="Amanah Legal Solutions">
+      <span class="brand-caption">
+        <span class="bc-main">Amanah Legal Solutions</span>
+      </span>
+    </a>
+    <nav class="main" aria-label="Main">
+      <a class="navlink" href="#problem">The Problem</a>
+      <a class="navlink" href="#method">The Method</a>
+      <a class="navlink" href="#services">Services</a>
+      <a class="navlink" href="#offer">The Guarantee</a>
+      <a class="navlink" href="#team">The Team</a>
+      <a class="navlink" href="#faq">FAQ</a>
+      <a class="btn btn--primary" href="#contact">Book a Free Strategy Call <span class="arr">&#8594;</span></a>
+    </nav>
+  </div>
+</header>
+
+<!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; HERO &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div>
+      <div class="caption-rule"><span class="docket">Legal Process Outsourcing &#183; Remote Paralegals from Pakistan &#183; U.S. Registered</span></div>
+      <h1 class="h-display">Your associates bill $250 an hour. Document review <span class="strike">isn&rsquo;t</span> <em class="flourish">shouldn&rsquo;t be</em> $250-an-hour work.</h1>
+      <p class="lede">Amanah takes document review, legal research, and drafting off your attorneys&rsquo; desks. Supervised by practicing lawyers, governed by NDA, and returned <strong>attorney-ready</strong>. No retainer. No lock-in.</p>
+      <div class="cta-row">
+        <a class="btn btn--primary" href="#contact">Book a Free Strategy Call <span class="arr">&#8594;</span></a>
+        <a class="btn btn--ghost" href="#problem">See the math</a>
+      </div>
+      <p class="risk-note">Try an Amanah Paralegal for 15 hours. If you aren&rsquo;t completely thrilled with the quality of their intake, drafting, or research, you pay nothing.</p>
+    </div>
+
+    <!-- signature artifact: the engagement memo -->
+    <div class="memo" aria-hidden="true">
+      <div class="m-head"><span>Engagement Memo</span><b>Confidential</b></div>
+      <div class="m-row"><span>Matter</span><span>Contract review &#183; 42 agreements</span></div>
+      <div class="m-row"><span>Mutual NDA</span><span class="ok">Executed &#10003;</span></div>
+      <div class="m-row"><span>Scope &amp; fee</span><span class="ok">Fixed, agreed up front &#10003;</span></div>
+      <div class="m-row"><span>Turnaround</span><span>5 business days</span></div>
+      <div class="m-row"><span>Lawyer review</span><span class="ok">Complete &#10003;</span></div>
+      <div class="m-sig">
+        <div class="line">
+          <span class="scr">A. Qamar</span>
+          <span class="cap" style="display:block;">Supervising Counsel</span>
+        </div>
+      </div>
+      <div class="stamp">Attorney-Ready</div>
+    </div>
+  </div>
+</section>
+
+<!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; FACTS BAR &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
+<div class="facts">
+  <div class="wrap">
+    <div class="fact"><b>Remote from Pakistan</b><span>Our paralegal team is based in Pakistan, delivering work remotely to U.S. law firms at a fraction of local cost.</span></div>
+    <div class="fact"><b>Mutual NDA first</b><span>Signed before a single document moves. No exceptions.</span></div>
+    <div class="fact"><b>Lawyer-reviewed, always</b><span>Every deliverable checked by a practicing lawyer, not just a paralegal.</span></div>
+    <div class="fact"><b>U.S. registered</b><span>Wyoming corporation. Your contract is with a U.S. entity. U.S. court formatting, federal &amp; state standards.</span></div>
+    <div class="fact"><b>No retainer required</b><span>Start with a single assignment. Fixed fee, fixed deadline.</span></div>
+  </div>
+</div>
+
+<!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; EXHIBIT A, THE PROBLEM &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
+<section class="sec" id="problem">
+  <div class="wrap">
+    <div class="exhibit-head rv"><span class="docket">Exhibit A &#183; The Billing-Rate Mismatch</span></div>
+    <div class="sec-intro rv">
+      <h2 class="h-section">The average lawyer bills <span class="underline-gold">3 hours</span> of an 8-hour day. Routine work is where the rest goes.</h2>
+      <p class="lede">That&rsquo;s not an opinion; it&rsquo;s the industry&rsquo;s own data.* Review stacks, research memos, first drafts: necessary work, but every hour your best people spend on it is premium capacity you can never bill again.</p>
+    </div>
+
+    <div class="problem-grid rv">
+      <div class="p-card">
+        <span class="docket docket--muted">A.1, The backlog</span>
+        <h3 class="h-card">Matters wait. Clients notice.</h3>
+        <p>Discovery piles up, contracts queue, and turnaround stretches from days to weeks. The work that wins clients gets crowded out by the work that merely keeps them.</p>
+      </div>
+      <div class="p-card">
+        <span class="docket docket--muted">A.2, The margin bleed</span>
+        <h3 class="h-card">Billed twice, shaved twice.</h3>
+        <p>Firms invoice only 88% of the hours they log, and collect just 93% of what they invoice.* Routine work is where clients push back hardest, so those hours get written down, written off, or eaten.</p>
+      </div>
+      <div class="p-card">
+        <span class="docket docket--muted">A.3, The hiring trap</span>
+        <h3 class="h-card">Headcount is a fixed cost. Caseloads aren&rsquo;t.</h3>
+        <p>A paralegal&rsquo;s median salary is $62,890, over $80,000 fully loaded with benefits.** Hire for the peak and you carry that through every trough. Staff for the trough and every busy month becomes a fire drill.</p>
+      </div>
+    </div>
+
+    <div class="ledger rv" aria-label="Paralegal cost comparison, illustrative">
+      <div class="l-head">
+        <h3>What a dedicated paralegal actually costs</h3>
+        <span class="docket docket--muted">Illustrative comparison</span>
+      </div>
+      <div class="l-row red">
+        <span class="who">U.S. in-house paralegal <small>$62,890 median salary; fully loaded with benefits, PTO, training, and management overhead**</small></span>
+        <span class="rate">$80,000+ / yr</span>
+        <span class="verdict">A fixed overhead whether your caseload is at peak or trough. You pay when they&rsquo;re idle. You still supervise.</span>
+      </div>
+      <div class="l-row">
+        <span class="who">Staffing agency or temp paralegal <small>25&#8211;40% markup on salary, short-term contracts, no quality guarantee, no lawyer oversight</small></span>
+        <span class="rate">$35&#8211;$55 / hr</span>
+        <span class="verdict">Unpredictable quality, high turnover, and zero assurance that work meets your standard before it lands on your desk</span>
+      </div>
+      <div class="l-row hero-row">
+        <span class="who">Amanah dedicated paralegal <small>Certified in your practice management software, lawyer-supervised, attorney-ready</small></span>
+        <span class="rate">A fraction, flexible &amp; transparent</span>
+        <span class="verdict">Scale with your caseload. Pay only for productive hours. Every deliverable reviewed by a supervising lawyer before it reaches you.</span>
+      </div>
+      <div class="l-foot">** U.S. Bureau of Labor Statistics, OEWS May 2025 median for paralegals &amp; legal assistants; loaded cost estimate includes ~30% benefits, training, and management overhead. &nbsp;* Clio 2025 Legal Trends Report: average lawyer rate $349/hr; utilization 3.0 of 8 hours billed. Your strategy call confirms exact rates before any commitment.</div>
+    </div>
+
+    <p class="problem-kicker rv">The problem was never your team&rsquo;s effort. It&rsquo;s that <b>U.S. paralegal overhead doesn&rsquo;t flex with your caseload</b> — and work that doesn&rsquo;t need a bar card to execute is still being paid for like it does.</p>
+  </div>
+</section>
+
+<!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; EXHIBIT B, THE METHOD &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
+<section class="sec sec--shade" id="method">
+  <div class="wrap">
+    <div class="exhibit-head rv"><span class="docket">Exhibit B &#183; The Attorney-Ready Method</span></div>
+    <div class="sec-intro rv">
+      <h2 class="h-section">Outsourcing fails when work leaves your standard. So we built a chain of custody that <span class="underline-gold">never lets it</span>.</h2>
+      <p class="lede">Most outsourcing hands your documents to strangers and hopes. The Attorney-Ready Method routes every paralegal engagement through five controlled steps, with a practicing lawyer as the final gate before anything comes back to you.</p>
+    </div>
+
+    <div class="route rv">
+      <div class="step">
+        <span class="num">I.</span>
+        <h3>Brief your paralegal</h3>
+        <p>A 20-minute call. You describe the practice areas, volume, and standards you need. We confirm scope and confirm your rate. No ambiguity, no surprises.</p>
+      </div>
+      <div class="step">
+        <span class="num">II.</span>
+        <h3>Execute the NDA</h3>
+        <p>Mutual NDA signed within 24 hours, before a single document or instruction is shared.</p>
+        <span class="gate">Gate 1</span>
+      </div>
+      <div class="step">
+        <span class="num">III.</span>
+        <h3>Match your paralegal</h3>
+        <p>A vetted paralegal, matched to your practice area and certified in your practice management software, placed inside your workflow within 24 hours.</p>
+      </div>
+      <div class="step">
+        <span class="num">IV.</span>
+        <h3>Lawyer review</h3>
+        <p>A supervising practicing lawyer checks every deliverable against your standard and jurisdiction before it leaves our hands.</p>
+        <span class="gate">Gate 2</span>
+      </div>
+      <div class="step">
+        <span class="num">V.</span>
+        <h3>Deliver attorney-ready</h3>
+        <p>In your format, on your deadline, ready for attorney sign-off. No rework loops. No surprises.</p>
+      </div>
+    </div>
+
+    <p class="mech-note rv">The two gates are the method. Nothing is shared before the NDA; nothing is sent before lawyer review. That&rsquo;s why we can guarantee the output — the process doesn&rsquo;t allow an unreviewed page to reach you.</p>
+  </div>
+</section>
+
+<!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; EXHIBIT C, SERVICES &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
+<section class="sec" id="services">
+  <div class="wrap">
+    <div class="exhibit-head rv"><span class="docket">Exhibit C &#183; Our Service &amp; Scope</span></div>
+    <div class="sec-intro rv">
+      <h2 class="h-section">We provide <em class="flourish">dedicated paralegals</em> to US law firms.</h2>
+      <p class="lede">That is our core service. We place skilled, supervised paralegals inside your workflow — ready to handle the high-volume, time-intensive work that does not require your bar card to execute, and a qualified lawyer reviews everything before it leaves our desk.</p>
+    </div>
+
+    <div class="clause rv" style="margin-bottom:2.8rem;">
+      <span class="docket">&#167; Primary Service</span>
+      <h3>Dedicated Paralegal Support</h3>
+      <p>You tell us the work. We assign a paralegal — or a team — with the right expertise. They operate under your instructions, on your timeline, governed by a mutual NDA. Every deliverable is reviewed by a supervising lawyer before it reaches you.</p>
+      <p style="margin-top:.8rem;">No retainer. No minimums. Start with one assignment.</p>
+    </div>
+
+    <div class="exhibit-head rv" style="margin-bottom:1.4rem;"><span class="docket">Scope of Expertise</span></div>
+    <p class="lede rv" style="margin-bottom:2rem;">The following are the practice areas our paralegals are trained and supervised to handle on your behalf.</p>
+
+    <div class="svc-grid rv">
+      <div class="svc"><span class="roman">i.</span><h3 class="h-card">Document Review</h3><p>Litigation documents, discovery materials, and regulatory filings, annotated and issue-flagged to your standard.</p></div>
+      <div class="svc"><span class="roman">ii.</span><h3 class="h-card">Contract Review &amp; Drafting</h3><p>Drafting and redlining of commercial agreements, tailored to your risk tolerance and returned ready for sign-off.</p></div>
+      <div class="svc"><span class="roman">iii.</span><h3 class="h-card">Legal Research</h3><p>Jurisdiction-aware research memos covering statutory analysis, case law, and regulatory interpretation, in your firm&rsquo;s format.</p></div>
+      <div class="svc"><span class="roman">iv.</span><h3 class="h-card">Personal Injury</h3><p>Demand letters, medical record summaries, liability research, and case file organisation for PI matters at any scale.</p></div>
+      <div class="svc"><span class="roman">v.</span><h3 class="h-card">Tobacco Litigation</h3><p>Document review, case chronologies, expert file management, and discovery support for complex tobacco and mass-tort litigation.</p></div>
+      <div class="svc"><span class="roman">vi.</span><h3 class="h-card">Privacy &amp; Compliance</h3><p>GDPR, CCPA, and regulatory framework support: policy review, gap analysis, audit preparation, and documentation.</p></div>
+    </div>
+    <p class="svc-more rv">Scope also covers <b>due diligence, litigation support, legal transcription, arbitration &amp; mediation preparation, regulatory compliance, and workflow automation</b>, every task assigned to a paralegal with verified expertise in that area. Every deliverable is lawyer-reviewed.</p>
+
+    <div class="areas rv" aria-label="Practice areas we support">
+      <span class="chip">Corporate &amp; Commercial</span>
+      <span class="chip">Civil Litigation</span>
+      <span class="chip">Personal Injury</span>
+      <span class="chip">Real Estate</span>
+      <span class="chip">Employment Law</span>
+      <span class="chip">Immigration</span>
+      <span class="chip">Family Law</span>
+      <span class="chip">Bankruptcy &amp; Restructuring</span>
+    </div>
+  </div>
+</section>
+
+<!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; EXHIBIT D, CONFIDENTIALITY &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
+<section class="sec sec--shade conf" id="confidentiality">
+  <div class="wrap">
+    <div style="grid-column:1/-1;">
+      <div class="exhibit-head rv"><span class="docket">Exhibit D &#183; Confidentiality, By Construction</span></div>
+      <div class="sec-intro rv">
+        <h2 class="h-section">You&rsquo;re trusting us with <span class="underline-gold">client work</span>. We built the firm around that fact.</h2>
+      </div>
+    </div>
+    <blockquote class="pull rv">
+      &ldquo;We do not run client documents through unvetted AI tools. We do not share data outside the engagement team. Confidentiality is not a policy page here. It is how the work moves.&rdquo;
+      <span class="attr">Operating principle, Amanah Legal Solutions</span>
+    </blockquote>
+    <div class="conf-list rv">
+      <div class="c-item"><span class="sym">&#167; 1</span><div><h3>Mutual NDA before work begins</h3><p>Executed before any documents or instructions are shared. Ready within 24 hours of your call.</p></div></div>
+      <div class="c-item"><span class="sym">&#167; 2</span><div><h3>Controlled document access</h3><p>Files are shared only with the assigned engagement team. Access is limited, logged, and monitored.</p></div></div>
+      <div class="c-item"><span class="sym">&#167; 3</span><div><h3>Lawyer review before delivery</h3><p>A supervising practicing lawyer reviews every deliverable before it returns to your firm.</p></div></div>
+      <div class="c-item"><span class="sym">&#167; 4</span><div><h3>U.S. data protection standards</h3><p>Handled to U.S. state and federal data protection standards, under a Wyoming-registered corporation.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; EXHIBIT E, THE OFFER &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
+<section class="sec dark offer" id="offer">
+  <div class="wrap">
+    <div class="exhibit-head rv"><span class="docket docket--gold">Exhibit E &#183; The Offer &amp; The Guarantee</span></div>
+    <div class="sec-intro rv">
+      <h2 class="h-section">Get a dedicated paralegal. We carry <em class="flourish">all</em> of the risk.</h2>
+      <p class="lede">You shouldn&rsquo;t have to trust a new paralegal on faith. So the first 15 hours are structured so that saying yes costs you nothing if we&rsquo;re wrong &mdash; and frees up real capacity if we&rsquo;re right.</p>
+    </div>
+
+    <div class="offer-grid">
+      <div class="rv">
+        <div class="stack">
+          <div class="s-item"><span class="idx">i.</span><div class="what"><b>20-minute strategy call</b><span>You describe your practice areas, volume, and current bottlenecks. We confirm whether we&rsquo;re the right fit. If we&rsquo;re not, we&rsquo;ll say so.</span></div><span class="tag">Free</span></div>
+          <div class="s-item"><span class="idx">ii.</span><div class="what"><b>Paralegal match within 24 hours</b><span>We identify and brief the right paralegal for your practice area, caseload, and existing software stack.</span></div><span class="tag">Free</span></div>
+          <div class="s-item"><span class="idx">iii.</span><div class="what"><b>Mutual NDA before work begins</b><span>Confidentiality in force before your paralegal sees a single document or instruction.</span></div><span class="tag">Included</span></div>
+          <div class="s-item"><span class="idx">iv.</span><div class="what"><b>15-hour risk-free trial</b><span>Your dedicated paralegal starts work. If you aren&rsquo;t completely thrilled with the quality, you pay nothing.</span></div><span class="tag">Guaranteed</span></div>
+          <div class="s-item"><span class="idx">v.</span><div class="what"><b>No retainer. No minimums. No lock-in.</b><span>Start with a 15-hour trial. Scale up or wind down at any time. Continue only if the paralegal earns it.</span></div><span class="tag">Always</span></div>
+          <div class="s-item"><span class="idx">vi.</span><div class="what"><b>Certified in Clio, Filevine, MyCase, Practice Panther, or Smokeball from day one.</b><span>If it takes you more than 1 hour to get them up and running in your portal, we credit your account 10 free hours.</span></div><span class="tag">Guaranteed</span></div>
+        </div>
+        <div class="offer-cta">
+          <a class="btn btn--gold" href="#contact">Claim the Free Strategy Call <span class="arr">&#8594;</span></a>
+          <p class="cap-note">To protect quality for existing clients, we onboard a limited number of new firms each month.</p>
+        </div>
+      </div>
+
+      <div class="clause rv">
+        <span class="docket">Clause 1 &#183; Risk Reversal</span>
+        <h3>The 15-Hour Guarantee</h3>
+        <p>Try an Amanah paralegal for 15 hours. If you aren&rsquo;t completely thrilled with the quality of their intake, drafting, or research &mdash; <b>you pay nothing.</b></p>
+        <p>Not a discount. Not a redo-and-bill-you-anyway. The invoice is void, and you keep the work product.</p>
+        <div class="c-sig">
+          <div class="line">
+            <span class="scr">Amanah Legal Solutions</span>
+            <span class="cap" style="display:block;">Authorized &amp; guaranteed</span>
+          </div>
+          <div class="seal"><span>Attorney<br>Ready<br>&#183;&nbsp;Guaranteed&nbsp;&#183;</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════ EXHIBIT F — THE PEOPLE ═══════════════════════ -->
+<section class="sec" id="team">
+  <div class="wrap">
+    <div class="exhibit-head rv"><span class="docket">Exhibit F &#183; The People Behind the Work</span></div>
+    <div class="sec-intro rv">
+      <h2 class="h-section">The attorneys, directors, and legal professionals <em class="flourish">responsible</em> for your work.</h2>
+    </div>
+
+    <!-- Chairman spotlight -->
+    <div class="team-spotlight rv">
+      <div class="ts-photo">
+        <img src="team/waleed.png" alt="Waleed Taimoor" style="object-fit:cover;object-position:center top;">
+      </div>
+      <div class="ts-bio">
+        <span class="t-role docket docket--gold">Chairman Board</span>
+        <h3>Waleed Taimoor</h3>
+        <span class="t-title-name">Chairman, Board of Directors</span>
+        <div class="t-divider"></div>
+        <p class="t-para">Waleed Taimoor leads Amanah Legal Solutions with a commitment to integrity, strategic clarity, and uncompromising professional standards. As CEO and Director of Legal Affairs, he oversees the firm's direction, ensures every client engagement reflects the highest levels of ethical and legal compliance, and drives a culture where trust is not a value statement — it is an operational commitment.</p>
+        <p class="t-para">With a background in legal oversight, compliance, and risk management, Waleed brings the structural discipline that US law firms require when placing their most sensitive work with an external partner. Under his leadership, Amanah Legal Solutions maintains the principle that no deliverable leaves the firm without a qualified legal professional having reviewed and approved it.</p>
+      </div>
+    </div>
+
+    <!-- Board of Directors -->
+    <div class="team-sub">
+      <div class="team-sub-head">
+        <span class="docket">Board of Directors</span>
+      </div>
+      <div class="team-grid">
+        <div class="t-card rv">
+          <div class="tc-img"><img src="team/ayesha.jpg" alt="Ayesha Qamar"></div>
+          <div class="tc-body">
+            <span class="t-role docket">Managing Director</span>
+            <h3>Ayesha Qamar</h3>
+            <p>Ayesha Qamar oversees the firm's data management practice, ensuring the accuracy, integrity, and security of all information handled on behalf of clients. She manages complex document repositories, maintains data governance protocols, and leads the teams responsible for organising, classifying, and processing legal data in full compliance with client confidentiality requirements.</p>
+          </div>
+        </div>
+        <div class="t-card rv">
+          <div class="tc-img"><img src="team/athal.jpg" alt="Athal Khan"></div>
+          <div class="tc-body">
+            <span class="t-role docket">Director Finance</span>
+            <h3>Athal Khan</h3>
+            <p>Athal Khan leads Amanah's strategic planning and operational infrastructure, ensuring that every engagement is delivered with precision, consistency, and scalability. He oversees workflow optimisation, resource allocation, and operational governance — translating high-level strategic objectives into execution frameworks that meet the rigorous demands of US law firm partners.</p>
+          </div>
+        </div>
+        <div class="t-card rv">
+          <div class="tc-img"><img src="team/humda.jpg" alt="Humda Qamar"></div>
+          <div class="tc-body">
+            <span class="t-role docket">Director Commercial</span>
+            <h3>Humda Qamar</h3>
+            <p>Humda Qamar leads Amanah's client development and marketing strategy, building the firm's presence among US law firms seeking a trusted LPO partner. She shapes the firm's communications, manages business development relationships, and ensures that Amanah's value proposition is clearly understood and consistently delivered across all client-facing engagements.</p>
+          </div>
+        </div>
+        <div class="t-card rv">
+          <div class="tc-img"><img src="team/aisha.jpg" alt="Aisha Nisar"></div>
+          <div class="tc-body">
+            <span class="t-role docket">Director Operations</span>
+            <h3>Aisha Nisar</h3>
+            <p>Aisha Nisar brings focused leadership to Amanah's operational teams, driving standards of quality and professional accountability across the firm's core service areas. Her oversight ensures that internal processes remain aligned with client expectations and that every deliverable reflects the firm's commitment to excellence.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Our Council -->
+    <div class="team-sub">
+      <div class="team-sub-head">
+        <span class="docket">Our Council</span>
+      </div>
+      <div class="team-grid">
+        <div class="t-card rv">
+          <div class="tc-img"><img src="team/waleed.png" alt="Waleed Taimoor"></div>
+          <div class="tc-body">
+            <span class="t-role docket">Chairman Board</span>
+            <h3>Waleed Taimoor</h3>
+            <p>Waleed leads the Legal Affairs division with a commitment to integrity, compliance, and strategic risk management. He oversees legal operations, ensures regulatory adherence, and provides counsel that supports sustainable growth and organisational excellence. His guidance keeps Amanah's engagements fully NDA-governed, ethically sound, and aligned with the highest professional standards expected by US law firm partners.</p>
+          </div>
+        </div>
+        <div class="t-card rv">
+          <div class="tc-img"><img src="team/asna.jpg" alt="Asna Ahsan"></div>
+          <div class="tc-body">
+            <span class="t-role docket">Legal Professional</span>
+            <h3>Asna Ahsan</h3>
+            <p>Asna Ahsan is a versatile legal professional whose practice spans the United States, the United Kingdom, and Pakistan. She has handled complex tobacco litigation, navigated UK immigration law, and worked extensively across multiple legal jurisdictions, bringing a nuanced understanding of international legal frameworks to every matter.</p>
+          </div>
+        </div>
+        <div class="t-card rv">
+          <div class="tc-img"><img src="team/umar.jpg" alt="Muhammad Umar Shahzad"></div>
+          <div class="tc-body">
+            <span class="t-role docket">Founder &amp; Legal Consultant</span>
+            <h3>Muhammad Umar Shahzad</h3>
+            <p>Muhammad Umar Shahzad is an Advocate of the High Court and the founding force behind Amanah Legal Solutions. With extensive experience spanning litigation, corporate law, and international arbitration across Pakistan and the UAE, he has built a career delivering cross-border legal support to clients navigating complex multi-jurisdictional landscapes.</p>
+          </div>
+        </div>
+        <div class="t-card rv">
+          <div class="tc-img"><img src="team/zoya.jpg" alt="Zoya Rao"></div>
+          <div class="tc-body">
+            <span class="t-role docket">Legal Professional</span>
+            <h3>Zoya Rao</h3>
+            <p>Zoya Rao provides cross-jurisdictional legal support to law firms and businesses, delivering high-quality legal research, drafting, document review, litigation support, and strategic legal analysis across multiple common law jurisdictions, with experience managing complex legal workflows while supervising paralegal teams.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════ FAQ ═══════════════════════ -->
+<section class="sec" id="faq">
+  <div class="wrap">
+    <div class="exhibit-head rv"><span class="docket">Exhibit G &#183; Anticipated Objections</span></div>
+    <div class="sec-intro rv">
+      <h2 class="h-section">Asked before you reach out.</h2>
+    </div>
+    <div class="faq-list rv">
+      <details>
+        <summary>Are you replacing my in-house counsel or paralegals?<span class="q-mark">+</span></summary>
+        <p>No, we extend your team&rsquo;s capacity; we don&rsquo;t replace its judgment. Legal strategy and final sign-off stay with your firm. We absorb the high-volume execution underneath it, and every deliverable is reviewed by a supervising lawyer before it reaches you.</p>
+      </details>
+      <details>
+        <summary>How is client confidentiality maintained?<span class="q-mark">+</span></summary>
+        <p>A mutual NDA is executed before anything is shared. Documents are accessible only to the assigned engagement team, access is limited and monitored, and no client materials are run through unvetted AI tools. Work is handled to U.S. state and federal data protection standards.</p>
+      </details>
+      <details>
+        <summary>Do you work with solo attorneys and small firms?<span class="q-mark">+</span></summary>
+        <p>Yes, there&rsquo;s no minimum firm size and no retainer. Many of our engagements start as a single contract review or research memo from a solo practitioner. The process is identical whether you send one document or a monthly caseload.</p>
+      </details>
+      <details>
+        <summary>What jurisdictions do you support?<span class="q-mark">+</span></summary>
+        <p>U.S. federal and all state jurisdictions. Research is jurisdiction-specific, documents follow U.S. court formatting, and the supervising lawyer checks jurisdictional context before delivery. We&rsquo;re registered in Sheridan, Wyoming.</p>
+      </details>
+      <details>
+        <summary>How fast is turnaround?<span class="q-mark">+</span></summary>
+        <p>Turnaround is set per engagement and confirmed in writing before work begins, typically days, not weeks, depending on volume. Because scope and deadline are fixed up front, there&rsquo;s no ambiguity about when work comes back.</p>
+      </details>
+      <details>
+        <summary>What billing models do you offer?<span class="q-mark">+</span></summary>
+        <p>Two: a fixed fee per assignment (quoted before you commit), or ongoing monthly capacity for firms with recurring volume. No retainers to start, no minimums, and no lock-in. Ongoing clients continue month to month because the work earns it.</p>
+      </details>
+      <details>
+        <summary>What if the work isn&rsquo;t up to our standard?<span class="q-mark">+</span></summary>
+        <p>Then the first assignment is free, that&rsquo;s the Attorney-Ready Guarantee. If the first deliverable isn&rsquo;t fit for attorney sign-off by your firm&rsquo;s standard, the invoice is void and you keep the work product. We can offer that because a practicing lawyer gates every deliverable before it leaves.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; CONTACT &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
+<section class="sec contact" id="contact">
+  <div class="wrap">
+    <div class="talk rv">
+      <span class="docket">Final Exhibit &#183; Getting Started</span>
+      <h2 class="h-section">Ready to move the backlog off your desk?</h2>
+      <p class="lede">Book a free 20-minute strategy call. You&rsquo;ll leave with a written scope, a fixed quote, and an NDA ready to sign, whether or not you proceed.</p>
+      <a class="btn btn--primary" href="mailto:info@amanahlegals.com?subject=Strategy%20Call%20Request%20&#8212;%20Amanah%20Legal%20Solutions">Book a Free Strategy Call <span class="arr">&#8594;</span></a>
+      <div class="alt">
+        <div class="row"><span class="k">Email</span><a href="mailto:info@amanahlegals.com">info@amanahlegals.com</a></div>
+        <div class="row"><span class="k">Call</span><a href="tel:+923349107306">+92 334 9107306</a></div>
+        <div class="row"><span class="k">WhatsApp</span><a href="https://wa.me/16505052194" target="_blank" rel="noopener">+1 (650) 505-2194</a></div>
+        <div class="row"><span class="k">Office</span><span>Plot 214, i10/3, Islamabad, Pakistan</span></div>
+      </div>
+    </div>
+
+    <form class="lead rv" id="quoteForm" name="lead" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="lead">
+      <p style="display:none;"><label>Don&rsquo;t fill this out: <input name="bot-field"></label></p>
+      <div class="f-head"><h3>Request a Scoped Quote</h3><span class="docket docket--muted">Response &lt; 1 business day</span></div>
+      <div class="f-two">
+        <div class="f-field"><label for="f-name">Your name</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
+        <div class="f-field"><label for="f-firm">Firm</label><input id="f-firm" name="firm" type="text" autocomplete="organization" required></div>
+      </div>
+      <div class="f-field"><label for="f-email">Work email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+      <div class="f-field">
+        <label for="f-type">Type of work</label>
+        <select id="f-type" name="type_of_work" required>
+          <option value="" disabled selected>Select the closest match</option>
+          <option>Document Review</option>
+          <option>Contract Review &amp; Drafting</option>
+          <option>Legal Research</option>
+          <option>Personal Injury</option>
+          <option>Tobacco Litigation</option>
+          <option>Due Diligence</option>
+          <option>Litigation Support</option>
+          <option>Privacy &amp; Compliance</option>
+          <option>Ongoing Monthly Support</option>
+          <option>Something else / not sure yet</option>
+        </select>
+      </div>
+      <div class="f-field"><label for="f-msg">What&rsquo;s on your desk right now?</label><textarea id="f-msg" name="message" placeholder="e.g. ~40 vendor agreements to review by end of month&#8230;"></textarea></div>
+      <button class="btn btn--primary" type="submit" id="quoteSubmit">Get My Fixed Quote, Free <span class="arr">&#8594;</span></button>
+      <div id="formMsg" style="display:none;margin-top:1.2rem;padding:1rem 1.2rem;border-radius:2px;font-size:.92rem;"></div>
+      <p class="f-fine">NDA available before you send anything sensitive.<br>Covered by the Attorney-Ready Guarantee.</p>
+    </form>
+  </div>
+</section>
+
+<!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; FOOTER &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
+<footer class="site">
+  <div class="wrap">
+    <div>
+      <a class="brand" href="#top" style="text-decoration:none;">
+        <span class="name">AMANAH</span>
+        <span class="sub">Legal Solutions</span>
+      </a>
+      <p>Legal process outsourcing for U.S. law firms. Remote paralegals based in Islamabad, Pakistan, under a U.S.-registered corporation. Every deliverable reviewed by practicing counsel before it reaches your desk.</p>
+    </div>
+    <div>
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#services">Document Review</a></li>
+        <li><a href="#services">Contract Review &amp; Drafting</a></li>
+        <li><a href="#services">Legal Research</a></li>
+        <li><a href="#services">Due Diligence</a></li>
+        <li><a href="#services">Litigation Support</a></li>
+        <li><a href="#services">Privacy &amp; Compliance</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:info@amanahlegals.com">info@amanahlegals.com</a></li>
+        <li><a href="mailto:help@amanahlegals.com">help@amanahlegals.com</a></li>
+        <li><a href="tel:+923349107306">+92 334 9107306</a></li>
+        <li><a href="https://wa.me/16505052194" target="_blank" rel="noopener">WhatsApp: +1 (650) 505-2194</a></li>
+        <li>Plot 214, i10/3, Islamabad, Pakistan</li>
+      </ul>
+    </div>
+    <div class="legal">
+      <span>&#169; 2026 Amanah Legal Solutions &#183; Wyoming Registered, USA &#183; Islamabad, Pakistan</span>
+      <span>NDA &#183; Confidential &#183; Lawyer-Led</span>
+    </div>
+  </div>
+</footer>
+
+<!-- &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; MOBILE STICKY CTA &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
+<div class="sticky-cta" id="stickyCta">
+  <a class="btn btn--gold" href="#contact">Book a Free Strategy Call <span class="arr">&#8594;</span></a>
+</div>
+
+<script>
+// Scroll reveal, progressive enhancement. Elements start visible; we only
+// hide the ones safely below the fold, then reveal them as they approach.
+// A sweep on scroll/resize plus a watchdog interval guarantees nothing can
+// remain hidden, whatever the environment does with events.
+(function(){
+  if(!('IntersectionObserver' in window)) return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const vh = window.innerHeight;
+  const pending = [];
+  document.querySelectorAll('.rv').forEach(el=>{
+    const r = el.getBoundingClientRect();
+    if(r.top > vh * 1.05){ el.classList.add('rv-wait'); pending.push(el); }
+  });
+  if(!pending.length) return;
+  const reveal = el => el.classList.remove('rv-wait');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ reveal(e.target); io.unobserve(e.target); } });
+  },{threshold:0, rootMargin:'0px 0px -6% 0px'});
+  pending.forEach(el=>io.observe(el));
+  function sweep(){
+    pending.forEach(el=>{
+      if(!el.classList.contains('rv-wait')) return;
+      const r = el.getBoundingClientRect();
+      if(r.top < window.innerHeight * 0.96 && r.bottom > 0) reveal(el);
+    });
+  }
+  ['scroll','resize'].forEach(ev=>window.addEventListener(ev, sweep, {passive:true}));
+  const tick = setInterval(()=>{
+    sweep();
+    if(pending.every(el=>!el.classList.contains('rv-wait'))) clearInterval(tick);
+  }, 400);
+  // absolute failsafe: everything visible after 6s no matter what
+  setTimeout(()=>{ pending.forEach(reveal); clearInterval(tick); }, 6000);
+})();
+
+// Form submission via Formsubmit (no backend required)
+(function(){
+  const form = document.getElementById('quoteForm');
+  if(!form) return;
+  form.addEventListener('submit', async function(e){
+    e.preventDefault();
+    const btn = document.getElementById('quoteSubmit');
+    const msg = document.getElementById('formMsg');
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    msg.style.display = 'none';
+
+    // Collect fields
+    const fd = new FormData(form);
+    const payload = {
+      name:         fd.get('name')        || '',
+      email:        fd.get('email')       || '',
+      firm:         fd.get('firm')        || '',
+      type_of_work: fd.get('type_of_work')|| '',
+      message:      fd.get('message')     || '',
+      _subject:     'New Quote Request from ' + (fd.get('firm') || fd.get('name') || 'amanahlegals.com')
+    };
+
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/info@amanahlegals.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+      const result = await res.json();
+      if(result.success === 'true' || result.success === true){
+        form.reset();
+        msg.style.display = 'block';
+        msg.style.background = 'rgba(169,130,47,.1)';
+        msg.style.border = '1px solid rgba(169,130,47,.35)';
+        msg.style.color = 'var(--ink)';
+        msg.innerHTML = '<strong>Request received.</strong> We will review your scope and respond within one business day.';
+        btn.textContent = 'Sent';
+      } else {
+        throw new Error(result.message || 'Unknown error');
+      }
+    } catch(err){
+      msg.style.display = 'block';
+      msg.style.background = 'rgba(114,32,48,.08)';
+      msg.style.border = '1px solid rgba(114,32,48,.3)';
+      msg.style.color = 'var(--oxblood)';
+      msg.innerHTML = 'Could not send right now. Email us at <a href="mailto:info@amanahlegals.com" style="color:var(--oxblood)">info@amanahlegals.com</a> and we\'ll respond within one business day.';
+      btn.disabled = false;
+      btn.innerHTML = 'Try Again <span class="arr">&#8594;</span>';
+    }
+  });
+})();
+
+// Hide sticky CTA when the contact form is on screen
+const cta = document.getElementById('stickyCta');
+const contact = document.getElementById('contact');
+if(cta && contact){
+  new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ cta.style.display = e.isIntersecting ? 'none' : ''; });
+  },{threshold:.15}).observe(contact);
+}
+</script>
+</body>
+</html>
