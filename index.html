@@ -138,7 +138,8 @@ header.site .wrap{
   display:flex;align-items:center;justify-content:space-between;
   padding-top:.9rem;padding-bottom:.9rem;
 }
-.brand{display:flex;flex-direction:column;text-decoration:none;line-height:1.1;}
+.brand{display:inline-flex;align-items:center;text-decoration:none;line-height:1;}
+.brand img.logo-a{height:54px;width:auto;display:block;}
 .brand .name{font-family:var(--serif-display);font-size:1.3rem;letter-spacing:.06em;}
 .brand .sub{font-family:var(--mono);font-size:.58rem;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);}
 nav.main{display:flex;align-items:center;gap:2rem;}
@@ -622,8 +623,7 @@ footer.site .legal{
 <header class="site">
   <div class="wrap">
     <a class="brand" href="#top">
-      <span class="name">AMANAH</span>
-      <span class="sub">Legal Solutions</span>
+      <img class="logo-a" src="logo-a.png" alt="Amanah Legal Solutions">
     </a>
     <nav class="main" aria-label="Main">
       <a class="navlink" href="#problem">The Problem</a>
