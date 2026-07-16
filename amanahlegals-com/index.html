@@ -541,6 +541,18 @@ form.lead .f-fine{
   margin-top:1rem;font-family:var(--mono);font-size:.64rem;letter-spacing:.06em;
   color:var(--ink-soft);text-align:center;line-height:1.7;
 }
+.f-type-toggle{display:flex;gap:.5rem;margin-bottom:1.4rem;}
+.f-toggle-opt{cursor:pointer;}
+.f-toggle-opt input[type="radio"]{display:none;}
+.f-toggle-opt span{
+  display:inline-block;padding:.42em 1em;
+  font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid var(--rule);color:var(--ink-soft);
+  transition:background .15s ease,color .15s ease,border-color .15s ease;
+}
+.f-toggle-opt input[type="radio"]:checked + span{
+  background:var(--ink);color:var(--paper);border-color:var(--ink);
+}
 
 /* &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;
    FOOTER
@@ -1078,9 +1090,13 @@ footer.site .legal{
       <input type="hidden" name="form-name" value="lead">
       <p style="display:none;"><label>Don&rsquo;t fill this out: <input name="bot-field"></label></p>
       <div class="f-head"><h3>Request a Scoped Quote</h3><span class="docket docket--muted">Response &lt; 1 business day</span></div>
+      <div class="f-type-toggle">
+        <label class="f-toggle-opt"><input type="radio" name="client_type" value="Law Firm" checked><span>Law Firm</span></label>
+        <label class="f-toggle-opt"><input type="radio" name="client_type" value="Individual Attorney"><span>Individual Attorney</span></label>
+      </div>
       <div class="f-two">
         <div class="f-field"><label for="f-name">Your name</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
-        <div class="f-field"><label for="f-firm">Firm</label><input id="f-firm" name="firm" type="text" autocomplete="organization" required></div>
+        <div class="f-field"><label for="f-firm" id="f-firm-label">Firm name</label><input id="f-firm" name="firm" type="text" autocomplete="organization" placeholder="" required></div>
       </div>
       <div class="f-two">
         <div class="f-field"><label for="f-email">Work email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
@@ -1189,6 +1205,27 @@ footer.site .legal{
   setTimeout(()=>{ pending.forEach(reveal); clearInterval(tick); }, 6000);
 })();
 
+// Firm / Individual toggle
+(function(){
+  const radios = document.querySelectorAll('input[name="client_type"]');
+  const firmLabel = document.getElementById('f-firm-label');
+  const firmInput = document.getElementById('f-firm');
+  if(!radios.length || !firmLabel || !firmInput) return;
+  radios.forEach(function(r){
+    r.addEventListener('change', function(){
+      if(this.value === 'Individual Attorney'){
+        firmLabel.textContent = 'Practice name (optional)';
+        firmInput.required = false;
+        firmInput.placeholder = 'Solo practice or leave blank';
+      } else {
+        firmLabel.textContent = 'Firm name';
+        firmInput.required = true;
+        firmInput.placeholder = '';
+      }
+    });
+  });
+})();
+
 // Form submission via Formsubmit (no backend required)
 (function(){
   const form = document.getElementById('quoteForm');
@@ -1204,6 +1241,7 @@ footer.site .legal{
     // Collect fields
     const fd = new FormData(form);
     const payload = {
+      client_type:  fd.get('client_type')  || '',
       name:         fd.get('name')        || '',
       email:        fd.get('email')       || '',
       phone:        fd.get('phone')       || '',
