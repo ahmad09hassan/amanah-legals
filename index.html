@@ -1082,7 +1082,10 @@ footer.site .legal{
         <div class="f-field"><label for="f-name">Your name</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
         <div class="f-field"><label for="f-firm">Firm</label><input id="f-firm" name="firm" type="text" autocomplete="organization" required></div>
       </div>
-      <div class="f-field"><label for="f-email">Work email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+      <div class="f-two">
+        <div class="f-field"><label for="f-email">Work email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+        <div class="f-field"><label for="f-phone">Contact number</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" placeholder="+1 (555) 000-0000" required></div>
+      </div>
       <div class="f-field">
         <label for="f-type">Type of work</label>
         <select id="f-type" name="type_of_work" required>
@@ -1203,6 +1206,7 @@ footer.site .legal{
     const payload = {
       name:         fd.get('name')        || '',
       email:        fd.get('email')       || '',
+      phone:        fd.get('phone')       || '',
       firm:         fd.get('firm')        || '',
       type_of_work: fd.get('type_of_work')|| '',
       message:      fd.get('message')     || '',
