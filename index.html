@@ -1221,7 +1221,9 @@ footer.site{background:var(--buckram);color:var(--paper-on-dark);padding:clamp(3
           <button class="active" onclick="toggleFirmType(this)">Law Firm</button>
           <button onclick="toggleFirmType(this)">Solo Attorney</button>
         </div>
-        <form id="leadForm" action="#" onsubmit="handleSubmit(event)">
+        <form id="leadForm" name="contact" data-netlify="true" netlify-honeypot="bot-field" action="#" onsubmit="handleSubmit(event)">
+          <input type="hidden" name="form-name" value="contact">
+          <p style="display:none;"><input name="bot-field"></p>
           <div class="form-row">
             <div class="field"><label for="fname">Full Name *</label><input id="fname" type="text" name="name" required placeholder="Jane Smith"></div>
             <div class="field"><label for="ffirm">Firm Name *</label><input id="ffirm" type="text" name="firm" required placeholder="Smith &amp; Associates"></div>
@@ -1499,9 +1501,20 @@ function toggleFirmType(btn){
 // ─── FORM SUBMIT ───
 function handleSubmit(e){
   e.preventDefault();
-  document.getElementById('leadForm').style.display='none';
-  document.getElementById('formSuccess').style.display='block';
-  // In production, replace this with your form handler / Netlify Forms / Formspree
+  var form = document.getElementById('leadForm');
+  var data = new FormData(form);
+  fetch('/', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    body: new URLSearchParams(data).toString()
+  })
+  .then(function(){
+    form.style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  })
+  .catch(function(){
+    alert('Something went wrong. Please email us directly at hello@amanahlegals.com or WhatsApp +1 (650) 505-2194.');
+  });
 }
 </script>
 </body>
