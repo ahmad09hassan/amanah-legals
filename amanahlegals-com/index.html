@@ -426,6 +426,20 @@ footer.site{background:var(--buckram);color:var(--paper-on-dark);padding:clamp(3
 </style>
 </head>
 <body>
+<!-- Netlify Forms static detection — hidden from users, required for Netlify to register the form at build time -->
+<form name="lead-form" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display:none;">
+  <input type="hidden" name="form-name" value="lead-form">
+  <input name="bot-field">
+  <input name="name">
+  <input name="firm">
+  <input name="email">
+  <input name="phone">
+  <select name="practice"><option>Litigation</option></select>
+  <select name="firm-size"><option>Solo (just me)</option></select>
+  <textarea name="current-tasks"></textarea>
+  <textarea name="delegation-tasks"></textarea>
+  <select name="preferred-contact"><option>Email</option></select>
+</form>
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Navigation">
@@ -1221,9 +1235,9 @@ footer.site{background:var(--buckram);color:var(--paper-on-dark);padding:clamp(3
           <button class="active" onclick="toggleFirmType(this)">Law Firm</button>
           <button onclick="toggleFirmType(this)">Solo Attorney</button>
         </div>
-        <form id="leadForm" name="contact" data-netlify="true" netlify-honeypot="bot-field" action="#" onsubmit="handleSubmit(event)">
-          <input type="hidden" name="form-name" value="contact">
-          <p style="display:none;"><input name="bot-field"></p>
+        <form id="leadForm" name="lead-form" method="POST" action="/" data-netlify="true" netlify-honeypot="bot-field" onsubmit="handleSubmit(event)">
+          <input type="hidden" name="form-name" value="lead-form">
+          <p style="display:none;"><label>Don't fill this out: <input name="bot-field"></label></p>
           <div class="form-row">
             <div class="field"><label for="fname">Full Name *</label><input id="fname" type="text" name="name" required placeholder="Jane Smith"></div>
             <div class="field"><label for="ffirm">Firm Name *</label><input id="ffirm" type="text" name="firm" required placeholder="Smith &amp; Associates"></div>
@@ -1249,7 +1263,7 @@ footer.site{background:var(--buckram);color:var(--paper-on-dark);padding:clamp(3
           </div>
           <div class="field">
             <label for="fsize">Number of Attorneys in Your Firm *</label>
-            <select id="fsize" name="size" required>
+            <select id="fsize" name="firm-size" required>
               <option value="">Select firm size</option>
               <option>Solo (just me)</option>
               <option>2–5 attorneys</option>
@@ -1260,15 +1274,15 @@ footer.site{background:var(--buckram);color:var(--paper-on-dark);padding:clamp(3
           </div>
           <div class="field">
             <label for="ftask">What work is taking most of your time right now?</label>
-            <textarea id="ftask" name="task" placeholder="e.g. Medical record summaries for 3 PI cases, discovery management, legal research memos..."></textarea>
+            <textarea id="ftask" name="current-tasks" placeholder="e.g. Medical record summaries for 3 PI cases, discovery management, legal research memos..."></textarea>
           </div>
           <div class="field">
             <label for="fdesk">What would you like Amanah to take off your desk first?</label>
-            <textarea id="fdesk" name="desk" placeholder="e.g. Start with a deposition summary, then ongoing discovery support..."></textarea>
+            <textarea id="fdesk" name="delegation-tasks" placeholder="e.g. Start with a deposition summary, then ongoing discovery support..."></textarea>
           </div>
           <div class="field">
             <label for="fcontact">Preferred contact method</label>
-            <select id="fcontact" name="contact">
+            <select id="fcontact" name="preferred-contact">
               <option>Email</option>
               <option>Phone</option>
               <option>Video call (Calendly)</option>
@@ -1502,18 +1516,38 @@ function toggleFirmType(btn){
 function handleSubmit(e){
   e.preventDefault();
   var form = document.getElementById('leadForm');
+  var btn = form.querySelector('button[type="submit"]');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+
   var data = new FormData(form);
+  // Ensure form-name is included (required by Netlify)
+  data.set('form-name', 'lead-form');
+
+  // Build URL-encoded body — Netlify Forms requires application/x-www-form-urlencoded
+  var encoded = [];
+  data.forEach(function(value, key){
+    encoded.push(encodeURIComponent(key) + '=' + encodeURIComponent(value));
+  });
+
   fetch('/', {
     method: 'POST',
     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    body: new URLSearchParams(data).toString()
+    body: encoded.join('&')
   })
-  .then(function(){
-    form.style.display = 'none';
-    document.getElementById('formSuccess').style.display = 'block';
+  .then(function(response){
+    if(response.ok || response.status === 200 || response.redirected){
+      form.style.display = 'none';
+      document.getElementById('formSuccess').style.display = 'block';
+    } else {
+      throw new Error('Network response was not ok: ' + response.status);
+    }
   })
-  .catch(function(){
-    alert('Something went wrong. Please email us directly at hello@amanahlegals.com or WhatsApp +1 (650) 505-2194.');
+  .catch(function(err){
+    console.error('Form error:', err);
+    btn.disabled = false;
+    btn.innerHTML = 'Book My Free Strategy Call <span class="arr">→</span>';
+    alert('Submission failed. Please email waleed@amanahlegals.com or WhatsApp +1 (650) 505-2194.');
   });
 }
 </script>
