@@ -443,26 +443,28 @@ footer.site{background:var(--buckram);color:var(--paper-on-dark);padding:clamp(3
 .mt-3{margin-top:3rem;}
 .gap-cta{display:flex;flex-wrap:wrap;gap:.9rem;align-items:center;margin-top:1.6rem;}
 
-/* === LIVE: overlay hero -- full team + text on image === */
+/* === LIVE: overlay hero -- badge top-left, text lower === */
 .hero{position:relative;min-height:clamp(600px,90vh,760px);padding:0;overflow:hidden;background:#0f0b08;display:flex;align-items:flex-end;}
 .hero::before{content:"";position:absolute;inset:0;background:url('hero-team.jpg') center top/100% auto no-repeat;z-index:0;}
-.hero::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(to bottom,rgba(10,8,6,.10) 0%,rgba(10,8,6,0) 30%,rgba(10,8,6,.30) 48%,rgba(10,8,6,.72) 70%,rgba(10,8,6,.95) 100%);}
+.hero::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(to bottom,rgba(10,8,6,.16) 0%,rgba(10,8,6,.02) 34%,rgba(10,8,6,.26) 52%,rgba(10,8,6,.70) 74%,rgba(10,8,6,.95) 100%);}
+.hero-topbar{position:absolute;top:clamp(.9rem,2.2vw,1.6rem);left:50%;transform:translateX(-50%);width:100%;max-width:var(--w-max);padding:0 var(--pad-x);z-index:3;}
+.hero-topbar .trial-badge{position:relative;z-index:3;margin:0 0 .7rem;box-shadow:0 2px 12px rgba(0,0,0,.45);}
+.hero-topbar .caption-rule{display:flex;align-items:center;gap:.8rem;margin:0;}
+.hero-topbar .caption-rule::before{content:"";width:1.8rem;flex:none;border-top:1px solid rgba(230,200,136,.5);}
+.hero-topbar .caption-rule::after{display:none;}
+.hero-topbar .caption-rule .docket{color:#E6C888;text-shadow:0 1px 8px rgba(0,0,0,.95),0 0 3px rgba(0,0,0,.85);white-space:nowrap;}
 .hero .wrap{position:relative;z-index:2;max-width:var(--w-max);margin:0 auto;width:100%;grid-template-columns:1fr;align-items:end;padding-top:0;padding-bottom:2.6rem;}
-.hero .wrap > div:first-child{max-width:52rem;}
+.hero .wrap > div:first-child{max-width:48rem;}
 .hero .memo{display:none !important;}
-.hero .trial-badge{position:relative;z-index:2;margin-bottom:.9rem;}
-.hero .caption-rule{margin-bottom:.9rem;}
-.hero .caption-rule .docket{color:#E6C888;text-shadow:0 1px 8px rgba(0,0,0,.9);}
-.hero .caption-rule::before,.hero .caption-rule::after{border-top-color:rgba(230,200,136,.35);}
-.hero h1.h-display{color:#FFFEFB;font-family:var(--serif-text);font-weight:700;font-size:clamp(1.7rem,3.4vw,2.75rem);line-height:1.12;text-shadow:0 2px 18px rgba(0,0,0,.92),0 1px 2px rgba(0,0,0,.65);margin-bottom:.9rem;}
+.hero h1.h-display{color:#FFFEFB;font-family:var(--serif-text);font-weight:700;font-size:clamp(1.3rem,2.5vw,2rem);line-height:1.16;text-shadow:0 2px 18px rgba(0,0,0,.92),0 1px 2px rgba(0,0,0,.65);margin-bottom:.9rem;}
 .hero h1 .flourish{color:#E7C57E;font-weight:700;}
-.hero .lede{color:#F1EADB;font-weight:500;max-width:38em;text-shadow:0 2px 14px rgba(0,0,0,.95);margin-bottom:1.5rem;}
+.hero .lede{color:#F1EADB;font-weight:500;max-width:38em;text-shadow:0 2px 14px rgba(0,0,0,.95);margin-bottom:1.4rem;}
 .hero .cta-row{margin-bottom:.9rem;}
 .hero .risk-note{color:#D9D0BE;text-shadow:0 1px 10px rgba(0,0,0,.95);}
 .hero .risk-note::before{color:#E7C57E;}
 .hero .btn--ghost{border-color:rgba(255,251,243,.6);color:#FBF7EF;background:rgba(10,8,6,.3);}
 .hero .btn--ghost:hover{background:var(--paper);color:var(--ink);border-color:var(--paper);}
-@media(max-width:600px){.hero{display:block;min-height:auto;}.hero::after{background:linear-gradient(to bottom,rgba(10,8,6,.05) 0,rgba(10,8,6,0) calc(56.25vw - 120px),rgba(10,8,6,.5) calc(56.25vw - 24px),#0f0b08 calc(56.25vw + 26px));}.hero .wrap{padding-top:calc(56.25vw + 14px);padding-bottom:2rem;align-items:start;}.hero h1.h-display{font-size:clamp(1.6rem,6.4vw,2.05rem);}.hero .lede{font-size:.97rem;}}
+@media(max-width:940px){.hero{display:block;min-height:auto;}.hero::after{background:linear-gradient(to bottom,rgba(10,8,6,.05) 0,rgba(10,8,6,0) calc(56.25vw - 120px),rgba(10,8,6,.5) calc(56.25vw - 24px),#0f0b08 calc(56.25vw + 26px));}.hero-topbar{position:static;transform:none;left:auto;padding:calc(56.25vw + 16px) var(--pad-x) 0;}.hero .wrap{padding-top:.7rem;padding-bottom:2.2rem;}}@media(max-width:600px){.hero h1.h-display{font-size:clamp(1.25rem,5vw,1.6rem);}.hero .lede{font-size:.97rem;}.hero-topbar .caption-rule{flex-wrap:wrap;}.hero-topbar .caption-rule .docket{white-space:normal;}.hero .wrap{padding-bottom:2rem;}}
 </style>
 </head>
 <body>
@@ -528,12 +530,14 @@ footer.site{background:var(--buckram);color:var(--paper-on-dark);padding:clamp(3
      1. HERO
 &#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552;&#9552; -->
 <section class="hero" aria-label="Hero">
+  <div class="hero-topbar">
+    <span class="trial-badge">&#127873; 15-Hour Free Trial &#8212; No Commitment</span>
+    <div class="caption-rule">
+      <span class="docket">Legal Process Outsourcing &#183; Remote Paralegals</span>
+    </div>
+  </div>
   <div class="wrap">
     <div>
-      <span class="trial-badge">&#127873; 15-Hour Free Trial &#8212; No Commitment</span>
-      <div class="caption-rule">
-        <span class="docket">Legal Process Outsourcing &#183; Remote Paralegals</span>
-      </div>
       <h1 class="h-display">Your attorneys earned the bar. Let them practice law. <em class="flourish">We'll handle the rest.</em></h1>
       <p class="lede">Trained remote paralegal support for U.S. law firms &#8212; helping attorneys reclaim non-billable hours without the cost of another full-time hire. Placement in approximately 24 hours. NDA-protected. Attorney-supervised.</p>
       <div class="cta-row">
